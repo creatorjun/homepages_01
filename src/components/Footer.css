@@ -1,14 +1,63 @@
-/* Footer */
-footer {
+/* src/components/Footer.css */
+
+.footer-content-area {
+  background-color: #f4f4f4;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.footer-logo img {
+  height: 50px;
+}
+
+.footer-info {
+  text-align: center;
+}
+
+.footer-split-text {
+  width: 100%;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.footer-info .footer-split-text {
+  font-size: 1rem;
+  color: #333;
+}
+
+.footer-centered-notice {
+  margin-top: 0;
+  padding: 0;
+}
+
+.split-item:not(:last-child)::after {
+  content: " | ";
+  white-space: pre;
+}
+
+.footer-legal {
   background-color: #333;
   color: #aaa;
   text-align: center;
   font-size: 0.9rem;
-  /* 데스크톱 환경을 위한 하단 여백 추가 */
   padding: 30px 20px 80px;
 }
 
-footer p {
+.footer-legal p {
   margin-bottom: 5px;
 }
 
@@ -17,10 +66,20 @@ footer p {
   color: #777;
 }
 
-/* 모바일 환경을 위한 미디어 쿼리 */
 @media (max-width: 768px) {
-  footer {
-    /* 모바일에서는 플로팅 버튼이 세로로 쌓여 높이가 더 높으므로, 여백을 더 많이 줍니다. */
+  .footer-logo img {
+    height: 27px;
+  }
+
+  .split-item {
+    display: block;
+  }
+
+  .split-item:not(:last-child)::after {
+    content: none;
+  }
+
+  .footer-legal {
     padding-bottom: 140px;
   }
 }
