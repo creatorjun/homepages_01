@@ -1,3 +1,5 @@
+// src/App.jsx
+
 import React, { useState, useEffect, useCallback } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -10,7 +12,6 @@ import Location from './components/Location';
 import Flats from './components/Flats';
 import Gallery from './components/Gallery';
 import Contact from './components/Contact';
-import FooterContentArea from './components/FooterContentArea';
 import Footer from './components/Footer';
 import Popup from './components/Popup';
 import FloatingContainer from './components/FloatingContainer';
@@ -73,7 +74,6 @@ function App() {
         <Gallery />
         <Contact />
       </main>
-      <FooterContentArea />
       <Footer />
       <FloatingContainer onShowPopup={handlePopupOpen} />
       <Popup
