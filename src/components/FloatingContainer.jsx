@@ -1,3 +1,5 @@
+// src/components/FloatingContainer.jsx
+
 import React, { useState } from 'react';
 import { FaCommentDots, FaBell } from 'react-icons/fa';
 import './FloatingContainer.css';
@@ -35,10 +37,11 @@ function FloatingContainer({ onShowPopup }) {
     setSmsSubmitMessage('');
 
     const formData = new FormData();
+    formData.append('action', 'sms');
     formData.append('Message', smsMessage);
     formData.append('Mobile', smsPhone);
 
-    const phpApiUrl = 'send_message.php';
+    const phpApiUrl = 'send_sms.php';
 
     try {
       const response = await fetch(phpApiUrl, {
