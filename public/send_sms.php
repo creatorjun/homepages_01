@@ -3,33 +3,46 @@
 
 header('Content-Type: application/json; charset=UTF-8');
 
-// --- 설정 부분 ---
-$munja_remote_id = "cruxknight";
-$munja_remote_pass = "C5j9LC9pk!Ya3UM";
-$munja_remote_callback = "01024356344";
-$admin_phone_number = "01048245900";
-// --- 설정 부분 끝 ---
+// --- .env 파일에서 설정값 로드 ---
+$env_path = __DIR__ . '/.env';
+if (!file_exists($env_path)) {
+    echo json_encode([
+        "success"    => false,
+        "message"    => "PHP 서버 설정 오류: .env 파일을 찾을 수 없습니다.",
+        "munja_code" => "CFG_ERR",
+        "munja_msg"  => "Missing .env file"
+    ]);
+    exit;
+}
+
+$env = parse_ini_file($env_path);
+
+$munja_remote_id       = $env['MUNJA_REMOTE_ID']       ?? '';
+$munja_remote_pass     = $env['MUNJA_REMOTE_PASS']     ?? '';
+$munja_remote_callback = $env['MUNJA_REMOTE_CALLBACK'] ?? '';
+$admin_phone_number    = $env['ADMIN_PHONE_NUMBER']    ?? '';
+// --- 설정값 로드 끝 ---
 
 // 설정값 유효성 검사
 if (empty($munja_remote_id) || empty($munja_remote_pass) || empty($munja_remote_callback) || empty($admin_phone_number)) {
     echo json_encode([
-        "success" => false,
-        "message" => "PHP 서버 설정 오류: 문자 발송 연동 정보가 올바르게 설정되지 않았습니다. send_sms.php 파일의 설정 부분을 확인해주세요.",
+        "success"    => false,
+        "message"    => "PHP 서버 설정 오류: .env 파일의 값이 올바르게 설정되지 않았습니다. .env.example 파일을 참고하여 .env 파일을 확인해주세요.",
         "munja_code" => "CFG_ERR",
-        "munja_msg" => "Configuration Error"
+        "munja_msg"  => "Configuration Error"
     ]);
     exit;
 }
 
 $response_array = [
-    "success" => false,
-    "message" => "요청 처리 중 오류가 발생했습니다.",
+    "success"    => false,
+    "message"    => "요청 처리 중 오류가 발생했습니다.",
     "munja_code" => "",
-    "munja_msg" => ""
+    "munja_msg"  => ""
 ];
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    $response_array["message"] = "잘못된 요청입니다. (POST 방식 필요)";
+    $response_array["message"]    = "잘못된 요청입니다. (POST 방식 필요)";
     $response_array["munja_code"] = "REQ_ERR";
     echo json_encode($response_array);
     exit;
