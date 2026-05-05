@@ -9,6 +9,7 @@ lerna-debug.log*
 
 # php
 *.php
+public/*.php
 
 node_modules
 dist
